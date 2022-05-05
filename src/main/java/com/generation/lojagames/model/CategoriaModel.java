@@ -1,12 +1,18 @@
 package com.generation.lojagames.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 	@Entity // Entidade da classe --> define a classe
 	@Table(name = "tb_categoria")
@@ -19,6 +25,10 @@ import javax.validation.constraints.Size;
 	@NotBlank (message = "O atríbuto tipo é obrigatório!") // Não aceita espaço vazio
 	@Size(min = 5, max = 100, message = "O atríbuto tipo deve conter o minímo 5 e no máximo 100 caracteres")
 	private String tipo; 
+	
+	@OneToMany(mappedBy = "CategoriaModel", cascade = CascadeType.REMOVE)
+    @JsonIgnoreProperties("CategoriaModel")
+    private List<ProdutoModel> produtos;
 
 	public Long getId() { //servem para ter retornos
 		return id;
