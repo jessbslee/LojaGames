@@ -19,6 +19,15 @@ import javax.validation.constraints.Size;
 	@NotBlank (message = "O atríbuto tipo é obrigatório!")
 	@Size(min = 5, max = 100, message = "O atríbuto tipo deve conter o minímo 5 e no máximo 100 caracteres")
 	private String tipo;
+	
+	@NotBlank(message = "O atributo genero é obrigatório!")
+    @Size(min = 2, max = 20)
+    private String genero;
+
+    @OneToMany(mappedBy = "categoria", cascade = CascadeType.REMOVE)
+    @JsonIgnoreProperties("categoria")
+    private List<Produto> produtos;
+    
 
 	public Long getId() {
 		return id;
