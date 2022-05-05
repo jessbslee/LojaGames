@@ -8,28 +8,19 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-	@Entity 
+	@Entity // Entidade da classe --> define a classe
 	@Table(name = "tb_categoria")
 	public class CategoriaModel {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // Para comentar que ele será auto incremento, serve como PK
 	private Long id;
 	
-	@NotBlank (message = "O atríbuto tipo é obrigatório!")
+	@NotBlank (message = "O atríbuto tipo é obrigatório!") // Não aceita espaço vazio
 	@Size(min = 5, max = 100, message = "O atríbuto tipo deve conter o minímo 5 e no máximo 100 caracteres")
-	private String tipo;
-	
-	@NotBlank(message = "O atributo genero é obrigatório!")
-    @Size(min = 2, max = 20)
-    private String genero;
+	private String tipo; 
 
-    @OneToMany(mappedBy = "categoria", cascade = CascadeType.REMOVE)
-    @JsonIgnoreProperties("categoria")
-    private List<Produto> produtos;
-    
-
-	public Long getId() {
+	public Long getId() { //servem para ter retornos
 		return id;
 	}
 
