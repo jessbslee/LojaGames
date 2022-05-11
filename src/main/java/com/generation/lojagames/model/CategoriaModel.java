@@ -26,9 +26,17 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 	@Size(min = 5, max = 100, message = "O atríbuto tipo deve conter o minímo 5 e no máximo 100 caracteres")
 	private String tipo; 
 	
-	@OneToMany(mappedBy = "CategoriaModel", cascade = CascadeType.REMOVE)
-    @JsonIgnoreProperties("CategoriaModel")
+	@OneToMany(mappedBy = "categoria", cascade = CascadeType.REMOVE)  
+    @JsonIgnoreProperties("categoria")
     private List<ProdutoModel> produtos;
+
+	public List<ProdutoModel> getProdutos() {
+		return produtos;
+	}
+
+	public void setProdutos(List<ProdutoModel> produtos) {
+		this.produtos = produtos;
+	}
 
 	public Long getId() { //servem para ter retornos
 		return id;
